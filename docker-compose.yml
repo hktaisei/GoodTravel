@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  app:
+    container_name: travel-app
+    build: 
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    environment:
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - postgres
+    ports:
+      - 5173:5173
+    volumes:
+      - ./app/:/var/www/
+      - /src/node_modules
+      - /src/vendor
+  
+  postgres: 
+    container_name: travel-postgres
+    hostname: travel-postgres
+    build: 
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+      args:
+        - DB_LANG=ja_JP
+    platform: linux/x86_64
+    environment:
+      TZ: "Asia/Tokyo"
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgres/database:/var/lib/postgresql/data
+
+  nginx:
+    container_name: travel-nginx
+    image: nginx:alpine
+    environment:
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - app
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    
+
+

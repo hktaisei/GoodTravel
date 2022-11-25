@@ -1,0 +1,5 @@
+# breezeのインストール
+composer require laravel/breeze --dev
+
+#vueを指定してbreezeをインストール
+php artisan breeze:install vue

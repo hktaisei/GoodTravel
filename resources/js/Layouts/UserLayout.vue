@@ -1,0 +1,14 @@
+<script setup>
+import { Head } from "@inertiajs/inertia-vue3";
+import NavBar from "../Components/NavBar.vue";
+</script>
+<template>
+    <Head> <title>Userページ</title></Head>
+    <header>
+        <h1 style="text-align:center">User</h1>
+        <NavBar/>
+    </header>
+    <main>
+        <slot />
+    </main>
+</template>

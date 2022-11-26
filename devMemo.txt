@@ -3,3 +3,5 @@ composer require laravel/breeze --dev
 
 #vueを指定してbreezeをインストール
 php artisan breeze:install vue
+
+breezeでInertia vue3を導入

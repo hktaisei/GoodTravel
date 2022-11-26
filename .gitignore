@@ -24,3 +24,5 @@ Homestead.json
 
 # database file
 docker/postgres/database
+
+public
